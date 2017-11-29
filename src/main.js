@@ -9,16 +9,16 @@ import Locales from './locale';
 import App from './components/app.vue';
 import Routers from './router';
 import Util from './libs/util';
-import iView from 'iview';
+import VUI from 'vvicui';
 import zhLocale from 'iview/dist/locale/zh-CN';
 import enLocale from 'iview/dist/locale/en-US';
 import Env from './config/env';
 import bus from './components/bus';
-import 'iview/dist/styles/iview.css';
+import 'vvicui/dist/styles/iview.css';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
-Vue.use(iView);
+Vue.use(VUI);
 
 // 开启debug模式
 Vue.config.debug = true;
@@ -54,14 +54,14 @@ if (Env != 'local') {
 const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
-    iView.LoadingBar.start();
+    VUI.LoadingBar.start();
     bus.loading = true;
     Util.title(to.meta.title);
     next();
 });
 
 router.afterEach((to, from, next) => {
-    iView.LoadingBar.finish();
+    VUI.LoadingBar.finish();
     bus.loading = false;
     window.scrollTo(0, 0);
     if (_hmt) {
